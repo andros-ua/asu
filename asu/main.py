@@ -122,7 +122,7 @@ def json_v1_arch_index(path: str, arch: str):
 @app.get("/json/v1/{path:path}/targets/{target:path}/{profile:path}.json")
 def json_v1_profile(path: str, target: str, profile: str):
     metadata: dict = client_get(
-        f"{settings.upstream_url}/{path}/targets/{target}/profiles.json"
+        f"{settings.custom_upstream_url}/{path}/targets/{target}/profiles.json"
     ).json()
     profiles: dict = metadata.pop("profiles", {})
     if profile not in profiles:
@@ -181,7 +181,7 @@ def json_v1_overview():
     overview = {
         "latest": generate_latest(),
         "branches": generate_branches(),
-        "upstream_url": settings.upstream_url,
+        "upstream_url": settings.custom_upstream_url,
         "server": {
             "version": __version__,
             "contact": "mail@aparcar.org",

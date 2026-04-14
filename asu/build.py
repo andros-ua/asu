@@ -177,9 +177,9 @@ def _build(build_request: BuildRequest, job=None):
     job.meta["imagebuilder_status"] = "container_setup"
     job.save_meta()
 
-    log.info(f"Pulling {image}...")
+    log.info(f"Checking local image {image}...")
     try:
-        podman.images.pull(image)
+        podman.images.get(image)
     except errors.ImageNotFound:
         report_error(
             job,

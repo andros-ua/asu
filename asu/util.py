@@ -650,7 +650,7 @@ def reload_profiles(app: FastAPI, version: str, target: str) -> bool:
     branch_data = get_branch(version)
     version_path = branch_data["path"].format(version=version)
     response = client_get(
-        settings.upstream_url + f"/{version_path}/targets/{target}/profiles.json"
+        settings.custom_upstream_url + f"/{version_path}/targets/{target}/profiles.json"
     )
 
     app.profiles[version][target] = {
