@@ -78,6 +78,7 @@ class Settings(BaseSettings):
     redis_url: str = "redis://localhost:6379"
     upstream_url: str = "https://downloads.openwrt.org"
     cache_url: str = ""
+    custom_upstream_url: str = ""
     allow_defaults: bool = False
     async_queue: bool = True
     branches_file: Union[str, Path, None] = None
@@ -95,10 +96,6 @@ class Settings(BaseSettings):
             "package_changes": package_changes(),
         },
         "25.12": release(32295),
-        "24.10": release(27990),
-        "23.05": release(23069),
-        "22.03": release(19160),
-        "21.02": release(15812, enabled=True),  # Enabled for now...
     }
     store_backend: str = "local"  # "local" or "s3"
     s3_endpoint: str = ""

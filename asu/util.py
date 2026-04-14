@@ -614,7 +614,7 @@ def reload_versions(app: FastAPI) -> bool:
             if in_supported_branch(version):
                 version_list.append(version)
 
-    response = client_get(settings.upstream_url + "/.versions.json")
+    response = client_get(settings.custom_upstream_url + "/.versions.json")
     if response.status_code != 200:
         log.info(f".versions.json: failed to download {response.status_code}")
         return False
@@ -661,7 +661,7 @@ def reload_targets(app: FastAPI, version: str) -> bool:
 
     branch_data = get_branch(version)
     version_path = branch_data["path"].format(version=version)
-    response = client_get(settings.upstream_url + f"/{version_path}/.targets.json")
+    response = client_get(settings.custom_upstream_url + f"/{version_path}/.targets.json")
 
     app.targets[version] = response.json() if response.status_code == 200 else {}
 
@@ -682,7 +682,7 @@ def reload_profiles(app: FastAPI, version: str, target: str) -> bool:
     branch_data = get_branch(version)
     version_path = branch_data["path"].format(version=version)
     response = client_get(
-        settings.upstream_url + f"/{version_path}/targets/{target}/profiles.json"
+        settings.custom_upstream_url + f"/{version_path}/targets/{target}/profiles.json"
     )
 
     app.profiles[version][target] = {
