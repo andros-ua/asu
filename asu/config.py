@@ -95,6 +95,7 @@ class Settings(BaseSettings):
             "path_packages": "DEPRECATED",
             "package_changes": package_changes(),
         },
+        "24.10": release(27990),
         "25.12": release(32295),
     }
     store_backend: str = "local"  # "local" or "s3"
